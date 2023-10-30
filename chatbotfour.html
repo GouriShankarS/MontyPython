@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SelfServe Chatbot</title>
+</head>
+<div class="container">
+    <div class="chatbox">
+        <div class="chatbox__support">
+            <div class="chatbox__header">
+                <div class="chatbox__image--header">
+                    <img src="B:\BShan\BUPA\Work\Chatbot\WorkChatbot.png" alt="logo">
+                </div>
+    </div>
+</div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+      body {
+        font-family: monospace;
+      }
+      h1 {
+        background-color: #0079c8;
+        color: white;
+        display: inline-block;
+        font-size: 2em;
+        margin: 0;
+        padding: 10px;
+      }
+      #chatbox {
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 60px;
+      }
+      #userInput {
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        margin-top: 60px;
+      }
+      #textInput {
+        width: 90%;
+        border: none;
+        border-bottom: 3px solid black;
+        font-family: monospace;
+        font-size: 17px;
+      }
+      .userText {
+        color: black;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: right;
+        line-height: 30px;
+      }
+      .userText span {
+        background-color: #e699ff;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      .botText {
+        color: black;
+        font-family: monospace;
+        font-size: 17px;
+        text-align: left;
+        line-height: 30px;
+      }
+      .botText span {
+        background-color: #ffA500;
+        padding: 10px;
+        border-radius: 2px;
+      }
+      #tidbit {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+      }
+      .boxed {
+        margin-left: auto;
+        margin-right: auto;
+        width: 78%;
+        margin-top: 60px;
+        border: 1px solid green;
+      }
+      .box {
+        border: 2px solid black;
+      }
+      #response {
+            font-size: 20px; /* Initial font size */
+            background-color: #0079c8; /* Set the background color of the button */
+            color: white; /* Set the text color */
+      }
+      input[type="text"] {
+            font-size: 20px; /* Set your desired font size */
+
+      }
+      input[type="submit"] {
+           font-size: 20px; /* Set the font size for the button text */
+            background-color: #0079c8; /* Set the background color of the button */
+            color: white; /* Set the text color */
+            padding: 5px 20px; /* Add padding for better button appearance */
+            border: none; /* Remove the default button border */
+            border-radius: 5px; /* Add rounded corners */
+            cursor: pointer;
+             /* Create a 3D effect with gradients and box shadows */
+            background: linear-gradient(to bottom, #FF8C00 5%, #FFA500 100%);
+            box-shadow: 0px 0px 0px 0px #FF4500;
+      }
+      input[type="submit"]:hover {
+            background: linear-gradient(to bottom, #FFA500 5%, #FF8C00 100%);
+       }
+    </style>
+    <center>
+    <h1>SelfServe Chatbot</h1>
+        <div class="box"></div>
+        <div class="boxed">
+      <div>
+        <div id="chatbox">
+          <p class="botText">
+            <span>Hello! I'm Dia. How can I help you today? </span>
+          </p>
+
+        </div>
+
+    <form action="/ask" method="post">
+        <!--<label for="question">Hello there! How can I help you today?</label>-->
+        <input type="text" name="question" placeholder="Ask a question...">
+        <input type="submit" value="Ask">
+
+    </form>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
+
+    <div id="response"></div>
+          <p></p>
+          <p></p>
+          <p></p>
+    <script>
+        document.querySelector('form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const response = await fetch('/ask', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            document.getElementById('response').textContent = data.response;
+
+
+        });
+    </script>
+    </center>
+</body>
+</html>
